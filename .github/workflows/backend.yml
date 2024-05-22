@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - run: touch ./prologue/backend/prologue/src/main/resources/application.properties
+      - run: touch ./backend/prologue/src/main/resources/application.properties
       - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./prologue/backend/prologue/src/main/resources/application.properties
         
       - name: Grant execute permission for gradlew
