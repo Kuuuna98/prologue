@@ -3,7 +3,7 @@ name: Deploy String boot
 on:
   push: 
     branches:
-      - develop
+      - develop
       
 env:
   S3_BUCKET_NAME : shadowmate-springboot
