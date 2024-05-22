@@ -28,23 +28,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - run: touch ${{ env.WORKING-DIRECTORY }}/src/main/resources/application.properties
-        working-directory: ${{ env.WORKING-DIRECTORY }}
-      - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ${{ env.WORKING-DIRECTORY }}/src/main/resources/application.properties
-        working-directory: ${{ env.WORKING-DIRECTORY }}
-      # 보안 properties 파일 생성
-      # 필요하지 않다면 지워도 됨
+      - run: touch ${{ env.WORKING_DIRECTORY }}/src/main/resources/application.properties
+      - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ${{ env.WORKING_DIRECTORY }}/src/main/resources/application.properties
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+        run: chmod +x ${{ env.WORKING_DIRECTORY }}/gradlew
         shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ${{ env.WORKING_DIRECTORY }}/gradlew build
         shell: bash
         
       - name: Make zip file
-        run: zip -r ./$GITHUB_SHA.zip .
+        run: zip -r ./$GITHUB_SHA.zip ${{ env.WORKING_DIRECTORY }}
         shell: bash
         
       - name: Configure AWS credentials
