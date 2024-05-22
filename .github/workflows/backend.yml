@@ -9,7 +9,7 @@ env:
   S3_BUCKET_NAME: shadowmate-springboot
   CODE_DEPLOY_APPLICATION_NAME: shadowmate
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: shadowmate
-  WORKING-DIRECTORY: ./prologue/backend/prologue
+  WORKING-DIRECTORY: ./backend/prologue
 
 jobs:
   build:
