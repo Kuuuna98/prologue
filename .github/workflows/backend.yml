@@ -21,15 +21,16 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
+          distribution: 'temurin'  # AdoptOpenJDK는 이제 Eclipse Temurin으로 변경되었습니다.
           java-version: 17
       
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - run: touch ./src/main/resources/application.properties
       - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
-      #보안 properties파일 생성
-      #필요하지 않다면 지워도 됨
+      # 보안 properties 파일 생성
+      # 필요하지 않다면 지워도 됨
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
