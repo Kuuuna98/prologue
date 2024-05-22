@@ -40,7 +40,9 @@ jobs:
         shell: bash
 
       - name: Build with Gradle
-        run: ./backend/prologue/gradlew build
+        run: |
+          cd ./backend/prologue
+          ./gradlew build
         shell: bash
         
       - name: Make zip file
