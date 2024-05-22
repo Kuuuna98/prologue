@@ -29,6 +29,9 @@ jobs:
 
       - name: Move Directory
         run: cd ./backend/prologue
+
+      - name: Checkout code
+        uses: actions/checkout@v4
         
       - name: make application.properties
         run: |
