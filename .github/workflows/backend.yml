@@ -28,9 +28,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - run: touch ./src/main/resources/application.properties
+      - run: touch ${{ env.WORKING-DIRECTORY }}/src/main/resources/application.properties
         working-directory: ${{ env.WORKING-DIRECTORY }}
-      - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
+      - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ${{ env.WORKING-DIRECTORY }}/src/main/resources/application.properties
         working-directory: ${{ env.WORKING-DIRECTORY }}
       # 보안 properties 파일 생성
       # 필요하지 않다면 지워도 됨
