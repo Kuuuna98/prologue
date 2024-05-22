@@ -1,7 +1,7 @@
 name: Deploy String boot
 
 on:
-  push:
+  push: 
     branches:
       - develop
 env:
