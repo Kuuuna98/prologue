@@ -9,7 +9,7 @@ env:
   S3_BUCKET_NAME: shadowmate-springboot
   CODE_DEPLOY_APPLICATION_NAME: shadowmate
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: shadowmate
-  WORKING-DIRECTORY: ./backend/prologue
+  WORKING-DIRECTORY: ./prologue/backend/prologue
 
 jobs:
   build:
@@ -31,7 +31,8 @@ jobs:
       - run: touch ${{ env.WORKING_DIRECTORY }}/src/main/resources/application.properties
         working-directory: ${{ env.WORKING-DIRECTORY }}
       - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ${{ env.WORKING_DIRECTORY }}/src/main/resources/application.properties
-
+        working-directory: ${{ env.WORKING-DIRECTORY }}
+        
       - name: Grant execute permission for gradlew
         run: chmod +x ${{ env.WORKING_DIRECTORY }}/gradlew
         shell: bash
