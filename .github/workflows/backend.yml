@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop
-
 env:
   S3_BUCKET_NAME : shadowmate-springboot
   CODE_DEPLOY_APPLICATION_NAME: shadowmate
