@@ -26,26 +26,21 @@ jobs:
       
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Move Directory
-        run: cd ./backend/prologue
-
-      - name: Checkout code
-        uses: actions/checkout@v4
         
       - name: make application.properties
         run: |
-          mkdir ./src/main/resources
-          touch ./src/main/resources/application.properties
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
+          mkdir ./backend/prologue/src/main/resources
+          cd ./backend/prologue/src/main/resources
+          touch ./application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./application.properties
         shell: bash
         
       - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+        run: chmod +x ./backend/prologue/gradlew
         shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./backend/prologue/gradlew build
         shell: bash
         
       - name: Make zip file
