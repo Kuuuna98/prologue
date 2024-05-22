@@ -11,7 +11,7 @@ env:
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: shadowmate
 
 jobs:
-  build:
+  build: 
     runs-on: ubuntu-latest
     
     steps:
