@@ -1,0 +1,32 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Spring Boot Build
+      run: |
+        mkdir ./backend/prologue
+        ./gradlew clean build --exclude-task test
+    
+    - name: docker image build
+      run: docker build -t ${{ secrets.DOCKERHUB_BACKEND_NAME }} .
+    
+    - name: docker login 
+      uses: docker/login-action@v2
+      with: 
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: docker Hub push
+      run: docker push ${{ secrets.DOCKERHUB_BACKEND_NAME }}
