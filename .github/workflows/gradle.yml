@@ -2,7 +2,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    paths: "./backend/prologue/**"
+    paths: "/backend/prologue/**"
     branches: [ "develop" ]
 
 jobs:
