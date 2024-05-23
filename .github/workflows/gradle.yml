@@ -60,10 +60,9 @@ jobs:
     - name: AWS EC2 Connection
       uses: appleboy/ssh-action@v0.1.6
       with:
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }} 
-        password: ${{ secrets.EC2_PASSWORD }} 
-        port: ${{ secrets.EC2_SSH_PORT }}
         timeout: 60s
         script: |
           sudo docker stop ${{ secrets.DOCKERHUB_BACKEND_NAME }}
