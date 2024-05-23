@@ -49,12 +49,12 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
          aws-region: ${{ secrets.AWS_REGION }}
 
-    # - name: Add Github Actions IP to Security group
-    #   run: |
-    #     aws ec2 authorize-security-group-ingress \
-    #     --group-id ${{ secrets.AWS_SG_ID }} \
-    #     --protocol tcp --port 22 \
-    #     --cidr ${{ steps.ip.outputs.ipv4 }}/32
+    - name: Add Github Actions IP to Security group
+      run: |
+        aws ec2 authorize-security-group-ingress \
+        --group-id ${{ secrets.AWS_SG_ID }} \
+        --protocol tcp --port 22 \
+        --cidr ${{ steps.ip.outputs.ipv4 }}/32
     
     # AWS EC2 Server Connect & Docker 명령어 실행 (8)
     - name: AWS EC2 Connection
@@ -70,8 +70,8 @@ jobs:
           sudo docker rm ${{ secrets.DOCKERHUB_BACKEND_NAME }}
           sudo docker run -it -d -p 8080:8080 --name ${{ secrets.DOCKERHUB_BACKEND_NAME }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_BACKEND_NAME }}
     
-    # # REMOVE Github IP FROM security group (9)
-    # - name: Remove IP FROM security group
-    #   run: |
-    #     aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+    # REMOVE Github IP FROM security group (9)
+    - name: Remove IP FROM security group
+      run: |
+        aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
     
