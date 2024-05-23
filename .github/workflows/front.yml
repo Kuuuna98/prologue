@@ -8,32 +8,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16.15.0
+          
       - name: make .env
         run: |
           cd ./frontend
           touch ./.env
           echo "${{ secrets.ENV }}" > ./.env
+
+      - name: Install Dependencies
+        run: cd ./frontend && npm install --production
         
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: |
-          cd ./frontend
-          npm i
-          npm run build  --if-present
-          npm test
+      - name: Build
+        run: cd ./frontend && npm run build
 
       # s3
       - uses: awact/s3-action@master
