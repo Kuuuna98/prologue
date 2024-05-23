@@ -49,6 +49,13 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
          aws-region: ${{ secrets.AWS_REGION }}
 
+    - name: Add Github Actions IP to Security group
+      run: |
+        aws ec2 authorize-security-group-ingress \
+        --group-id ${{ secrets.AWS_SG_ID }} \
+        --protocol tcp --port 22 \
+        --cidr ${{ steps.ip.outputs.ipv4 }}/32
+    
     # Add github ip to AWS (7)
     - name: Add GitHub IP to AWS
       run: |
