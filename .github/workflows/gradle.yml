@@ -16,7 +16,7 @@ jobs:
     
     - name: Spring Boot Build
       run: |
-        mkdir ./backend/prologue
+        cd ./backend/prologue
         ./gradlew clean build --exclude-task test
     
     - name: docker image build
