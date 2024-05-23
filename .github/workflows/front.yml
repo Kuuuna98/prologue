@@ -24,7 +24,7 @@ jobs:
           echo "${{ secrets.ENV }}" > ./.env
 
       - name: Install Dependencies
-        run: cd ./frontend && npm install --production
+        run: cd ./frontend && npm install
         
       - name: Build
         run: cd ./frontend && npm run build
